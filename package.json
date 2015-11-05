@@ -4,8 +4,14 @@
   "description": "Redux Full-Stack Tutorial - Voting App",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --compilers js:babel/register --recursive",
+    "test:watch": "npm run test -- --watch"
   },
   "author": "Alyssa Biasi",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "babel": "^6.0.15",
+    "chai": "^3.4.0",
+    "mocha": "^2.3.3"
+  }
 }
