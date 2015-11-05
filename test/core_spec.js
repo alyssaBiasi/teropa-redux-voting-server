@@ -16,7 +16,7 @@ describe('core', () => {
   });
 
   describe('nextVote()', () => {
-    describe('no current vote', () => {
+    context('no current vote', () => {
       const state = Map({
         entries: List.of('C', 'D', 'E')
       });
@@ -34,7 +34,7 @@ describe('core', () => {
       });
     });
 
-    describe('current vote winner', () => {
+    context('current vote winner', () => {
       const vote = Map({
         pair: List.of('A', 'B'),
         tally: Map({ A: 3, B: 2 })
@@ -57,7 +57,7 @@ describe('core', () => {
       });
     });
 
-    describe('current vote draw', () => {
+    context('current vote draw', () => {
       const vote = Map({
         pair: List.of('A', 'B'),
         tally: Map({ A: 3, B: 3 })
@@ -85,7 +85,7 @@ describe('core', () => {
     const item = 'A';
     const pair = List.of(item, 'B');
 
-    describe('no existing tally', () => {
+    context('no existing tally', () => {
       const state = Map({
         vote: Map({ pair }),
         entries: List()
@@ -101,7 +101,7 @@ describe('core', () => {
       });
     });
 
-    describe('existing tally', () => {
+    context('existing tally', () => {
       const tally = Map({ [item]: 3 });
       const state = Map({
         vote: Map({ pair, tally }),
