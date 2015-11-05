@@ -12,3 +12,8 @@ export function nextVote(state) {
   });
 };
 
+export function vote(state, entry) {
+  const path = ['vote', 'tally', entry];
+  return state.updateIn(path, 0, tally => tally + 1);
+}
+
