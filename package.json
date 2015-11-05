@@ -4,7 +4,7 @@
   "description": "Redux Full-Stack Tutorial - Voting App",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --compilers js:babel/register --recursive",
+    "test": "mocha --compilers js:babel/register --require ./test/test_helper.js --recursive",
     "test:watch": "npm run test -- --watch"
   },
   "author": "Alyssa Biasi",
@@ -12,6 +12,10 @@
   "devDependencies": {
     "babel": "^6.0.15",
     "chai": "^3.4.0",
+    "chai-immutable": "^1.5.1",
     "mocha": "^2.3.3"
+  },
+  "dependencies": {
+    "immutable": "^3.7.5"
   }
 }
