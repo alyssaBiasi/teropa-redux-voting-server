@@ -16,18 +16,68 @@ describe('core', () => {
   });
 
   describe('nextVote()', () => {
-    const state = Map({ entries: List.of('A', 'B', 'C') });
+    describe('no current vote', () => {
+      const state = Map({
+        entries: List.of('C', 'D', 'E')
+      });
 
-    beforeEach(() => {
-      nextState = nextVote(state);
+      beforeEach(() => {
+        nextState = nextVote(state);
+      });
+
+      it('sets the next vote', () => {
+        expect(nextState.get('vote')).to.equal(Map({ pair: List.of('C', 'D') }));
+      });
+
+      it('removes the vote entries', () => {
+        expect(nextState.get('entries')).to.equal(List.of('E'));
+      });
     });
 
-    it('sets the next vote', () => {
-      expect(nextState.get('vote')).to.equal(Map({ pair: List.of('A', 'B') }));
+    describe('current vote winner', () => {
+      const vote = Map({
+        pair: List.of('A', 'B'),
+        tally: Map({ A: 3, B: 2 })
+      });
+      const state = Map({
+        vote,
+        entries: List.of('C', 'D', 'E')
+      });
+
+      beforeEach(() => {
+        nextState = nextVote(state);
+      });
+
+      it('sets the next vote', () => {
+        expect(nextState.get('vote')).to.equal(Map({ pair: List.of('C', 'D') }));
+      });
+
+      it('appends the winner', () => {
+        expect(nextState.get('entries')).to.equal(List.of('E', 'A'));
+      });
     });
 
-    it('removes the vote entries', () => {
-      expect(nextState.get('entries')).to.equal(List.of('C'));
+    describe('current vote draw', () => {
+      const vote = Map({
+        pair: List.of('A', 'B'),
+        tally: Map({ A: 3, B: 3 })
+      });
+      const state = Map({
+        vote,
+        entries: List.of('C', 'D', 'E')
+      });
+
+      beforeEach(() => {
+        nextState = nextVote(state);
+      });
+
+      it('sets the next vote', () => {
+        expect(nextState.get('vote')).to.equal(Map({ pair: List.of('C', 'D') }));
+      });
+
+      it('appends both entries', () => {
+        expect(nextState.get('entries')).to.equal(List.of('E', 'A', 'B'));
+      });
     });
   });
 
