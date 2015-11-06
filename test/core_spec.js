@@ -79,6 +79,25 @@ describe('core', () => {
         expect(nextState.get('entries')).to.equal(List.of('E', 'A', 'B'));
       });
     });
+
+    context('one entry left', () => {
+      const vote = Map({
+        pair: List.of('A', 'B'),
+        tally: Map({ A: 4, B: 3 })
+      });
+      const state = Map({
+        vote,
+        entries: List()
+      });
+
+      beforeEach(() => {
+        nextState = nextVote(state);
+      });
+
+      it('makrs the overall winner', () => {
+        expect(nextState).to.equal(Map({ winner: 'A' }));
+      });
+    });
   });
 
   describe('vote()', () => {

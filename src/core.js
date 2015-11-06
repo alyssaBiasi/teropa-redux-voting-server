@@ -5,12 +5,18 @@ export function setEntries(state, entries) {
 };
 
 export function nextVote(state) {
-  const entries = state.get('entries');
   const vote = state.get('vote');
+  const entries = state.get('entries').concat(getWinners(vote));
+
+  if(entries.size === 1) {
+    return state.remove('vote')
+                .remove('entries')
+                .set('winner', entries.first());
+  }
 
   return state.merge({
     vote: Map({ pair: entries.take(2) }),
-    entries: entries.skip(2).concat(getWinners(vote))
+    entries: entries.skip(2)
   });
 };
 
