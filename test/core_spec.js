@@ -105,10 +105,7 @@ describe('core', () => {
     const pair = List.of(item, 'B');
 
     context('no existing tally', () => {
-      const state = Map({
-        vote: Map({ pair }),
-        entries: List()
-      });
+      const state = Map({ pair });
 
       beforeEach(() => {
         nextState = vote(state, item);
@@ -116,16 +113,13 @@ describe('core', () => {
 
       it('starts the tally', () => {
         const expected = Map({ pair, tally: Map({ [item]: 1 }) });
-        expect(nextState.get('vote')).to.equal(expected);
+        expect(nextState).to.equal(expected);
       });
     });
 
     context('existing tally', () => {
       const tally = Map({ [item]: 3 });
-      const state = Map({
-        vote: Map({ pair, tally }),
-        entries: List()
-      });
+      const state = Map({ pair, tally });
 
       beforeEach(() => {
         nextState = vote(state, item);
@@ -133,7 +127,7 @@ describe('core', () => {
 
       it('increments the tally', () => {
         const expected = Map({ pair, tally: Map({ [item]: 4 }) });
-        expect(nextState.get('vote')).to.equal(expected);
+        expect(nextState).to.equal(expected);
       });
     });
   });

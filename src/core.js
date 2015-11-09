@@ -23,7 +23,7 @@ export function nextVote(state) {
 };
 
 export function vote(state, entry) {
-  const path = ['vote', 'tally', entry];
+  const path = ['tally', entry];
   return state.updateIn(path, 0, tally => tally + 1);
 }
 
