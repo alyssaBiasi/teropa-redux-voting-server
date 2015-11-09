@@ -43,5 +43,21 @@ describe('reducer', () => {
       expect(reducer(state, action)).to.equal(fromJS({ vote, entries: [] }));
     });
   });
+
+  describe('batch actions', () => {
+    const actions = [
+      {type: 'SET_ENTRIES', entries: ['A', 'B']},
+      {type: 'NEXT_VOTE'},
+      {type: 'VOTE', entry: 'A'},
+      {type: 'VOTE', entry: 'B'},
+      {type: 'VOTE', entry: 'A'},
+      {type: 'NEXT_VOTE'}
+    ];
+
+    it('reduces the actions', () => {
+      const finalState = actions.reduce(reducer, Map());
+      expect(finalState).to.equal(fromJS({ winner: 'A' }));
+    });
+  });
 });
 
