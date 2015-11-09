@@ -13,6 +13,12 @@ describe('reducer', () => {
     it('sets the entries', () => {
       expect(reducer(state, action)).to.equal(fromJS({ entries }));
     });
+
+    describe('undefined state', () => {
+      it('intialises the state', () => {
+        expect(reducer(undefined, action)).to.equal(fromJS({ entries }));
+      });
+    });
   });
 
   describe('next vote', () => {
