@@ -10,6 +10,10 @@
   },
   "author": "Alyssa Biasi",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:alyssaBiasi/teropa-redux-voting-server.git"
+  },
   "devDependencies": {
     "babel-cli": "^6.1.2",
     "babel-core": "^6.0.20",
